@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Green Compass | Research Community</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Color Palette */
+            --primary-green: #2E7D32;
+            --dark-green: #1B5E20;
+            --light-green: #E8F5E9;
+            --accent-gold: #FFC107;
+            --accent-gold-hover: #FFB300;
+            --bg-white: #FFFFFF;
+            --bg-gray: #F5F5F5;
+            --text-dark: #1F2937;
+            --text-muted: #4B5563;
+            --border-color: #E5E7EB;
+            
+            /* Typography */
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            
+            /* Shadows & Radius */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-full: 9999px;
+        }
+
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            color: var(--dark-green);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-green);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--dark-green);
+        }
+
+        /* Reusable Components */
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .bg-gray {
+            background-color: var(--bg-gray);
+        }
+
+        .bg-green {
+            background-color: var(--dark-green);
+            color: var(--bg-white);
+        }
+
+        .bg-green h2, .bg-green p {
+            color: var(--bg-white);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .bg-green .section-header p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-green);
+            color: var(--bg-white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-green);
+            color: var(--bg-white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-white);
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-green);
+            transform: translateY(-2px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-gold);
+            color: var(--text-dark);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-gold-hover);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: var(--bg-white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--dark-green);
+        }
+
+        .logo i {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 5rem;
+            background: linear-gradient(to bottom, var(--light-green), var(--bg-white));
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-icon-wrapper {
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            color: var(--primary-green);
+            /* Subtle pulse and gentle rotation animation */
+            animation: gentle-pulse-spin 6s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes gentle-pulse-spin {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.08) rotate(10deg); color: var(--dark-green); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark-green);
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--primary-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero .description {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* About Section */
+        .about-content {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--primary-green);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+        
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .team-card {
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .founder-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .founder-card {
+            max-width: 300px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--light-green);
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 1.5rem;
+            border: 2px solid rgba(46, 125, 50, 0.2);
+        }
+
+        .team-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            color: var(--dark-green);
+        }
+
+        .team-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Progress / Timeline Section */
+        .timeline {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary-green);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: -2.6rem;
+            top: 0;
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            background-color: var(--primary-green);
+            border: 3px solid var(--bg-white);
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+        }
+
+        .timeline-content {
+            background: var(--bg-white);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .timeline-content h4 {
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        
+        .timeline-note {
+            margin-top: 3rem;
+            text-align: center;
+            font-style: italic;
+            color: var(--primary-green);
+            font-weight: 500;
+        }
+
+        /* Join Section */
+        .join-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .join-box p {
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .join-note {
+            display: block;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            background: var(--bg-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .contact-info {
+            background-color: var(--primary-green);
+            color: var(--bg-white);
+            padding: 3rem;
+        }
+
+        .contact-info h3 {
+            color: var(--bg-white);
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-method i {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        .contact-method a {
+            color: var(--bg-white);
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .contact-method a:hover {
+            color: var(--accent-gold);
+        }
+
+        .contact-form-wrap {
+            padding: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .form-disclaimer {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .form-disclaimer i {
+            margin-top: 0.2rem;
+            color: var(--accent-gold);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: #D1D5DB;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--bg-white);
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo i {
+            color: var(--primary-green);
+        }
+
+        .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: #D1D5DB;
+            margin: 0 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--bg-white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom p {
+            margin-bottom: 0.5rem;
+        }
+
+        .built-note {
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero .subtitle {
+                font-size: 1.25rem;
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .btn {
+                width: 100%;
+            }
+            .about-content, .contact-info, .contact-form-wrap {
+                padding: 2rem 1.5rem;
+            }
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <a href="#" class="logo">
+                    <i class="fa-regular fa-compass"></i> The Green Compass
+                </a>
+                <!-- Optional: Desktop Navigation Links could go here if needed later -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-icon-wrapper">
+                    <i class="fa-regular fa-compass hero-icon"></i>
+                </div>
+                <h1>The Green Compass</h1>
+                <p class="subtitle">Research for Environment, Sustainability, and the Future</p>
+                <p class="description">
+                    From idle groups to real research. We are a small, active team producing meaningful work. 
+                    Join us to learn, contribute, or simply stay connected.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://chat.whatsapp.com/GCgbYFckoAC7M4ALZZe44f" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                        <i class="fa-brands fa-whatsapp"></i> Join Our Community
+                    </a>
+                    <a href="#team" class="btn btn-secondary">
+                        Meet the Team
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About / Mission Section -->
+        <section class="section-padding bg-gray" id="about">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What We Do</h2>
+                    <p>A community-led research initiative turning ambition into output.</p>
+                </div>
+                <div class="about-content">
+                    <p>
+                        The Green Compass started as a research group of 25 members. Most were inactive. Instead of letting it die, we built a core team of 6 committed researchers. Now we are opening our doors to a wider community of people who care about environment, sustainability, and the future.
+                    </p>
+                    <p>
+                        We believe in action over attendance. We don't force participation. But if you raise your hand for a task, we expect you to complete it. Our goal is to produce real research outputs — papers, reports, policy briefs — while helping members build career-relevant skills.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="section-padding" id="team">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Core Research Team</h2>
+                    <p>The active members driving The Green Compass forward.</p>
+                </div>
+                
+                <div class="founder-container">
+                    <div class="team-card founder-card">
+                        <div class="avatar">AAP</div>
+                        <h3>Abrar Ahsan Purno</h3>
+                        <p>Research Director</p>
+                    </div>
+                </div>
+                
+                <div class="team-grid">
+                    <!-- Member 2 -->
+                    <div class="team-card">
+                        <div class="avatar">NN</div>
+                        <h3>Md Kamrul Islam Tamim</h3>
+                        <p>Core Researcher</p>
+                    </div>
+                    
+                    <!-- Member 3 -->
+                    <div class="team-card">
+                        <div class="avatar">DT</div>
+                        <h3>Afia Rahaman Azmire</h3>
+                        <p>Core Researcher</p>
+                    </div>
+                    
+                    <!-- Member 4 -->
+                    <div class="team-card">
+                        <div class="avatar">PS</div>
+                        <h3>Diya Tabassum</h3>
+                        <p>Core Researcher</p>
+                    </div>
+                    
+                    <!-- Member 5 -->
+                    <div class="team-card">
+                        <div class="avatar">MT</div>
+                        <h3>MD Zubaid Hosen</h3>
+                        <p>Core Researcher</p>
+                    </div>
+                    
+                    <!-- Member 6 -->
+                    <div class="team-card">
+                        <div class="avatar">AA</div>
+                        <h3>Shahadat Hossain</h3>
+                        <p>Core Researcher</p>
+                    </div>
+                    
+                    <!-- Member 7 -->
+                    <div class="team-card">
+                        <div class="avatar">MZ</div>
+                        <h3>Farzana Fahima</h3>
+                        <p>Core Researcher</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Progress Section -->
+        <section class="section-padding bg-gray" id="progress">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Journey So Far</h2>
+                    <p>Small steps. Real progress.</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon"></div>
+                        <div class="timeline-content">
+                            <h4>April 2026</h4>
+                            <p>Core team of 6 selected from 25 applicants.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"></div>
+                        <div class="timeline-content">
+                            <h4>April 2026</h4>
+                            <p>WhatsApp community launched to expand our network.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"></div>
+                        <div class="timeline-content">
+                            <h4>May 2026</h4>
+                            <p>Official website launched to establish our online presence.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-icon"></div>
+                        <div class="timeline-content">
+                            <h4>First Research Project</h4>
+                            <p>Defining research questions on environmental sustainability in local communities.</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="timeline-note"><i class="fa-solid fa-seedling"></i> First research output coming soon.</p>
+            </div>
+        </section>
+
+        <!-- Join Community Section -->
+        <section class="section-padding bg-green" id="join">
+            <div class="container">
+                <div class="section-header">
+                    <h2>You Are Welcome Here</h2>
+                    <p>Expand your horizons in environmental research.</p>
+                </div>
+                
+                <div class="join-box">
+                    <p>
+                        Not ready for core team commitment? No problem. Join our WhatsApp community to observe, learn, and get notified about parallel research teams and career opportunities in environment and sustainability fields.
+                    </p>
+                    <a href="https://chat.whatsapp.com/GCgbYFckoAC7M4ALZZe44f" target="_blank" rel="noopener noreferrer" class="btn btn-accent">
+                        <i class="fa-brands fa-whatsapp"></i> Join on WhatsApp
+                    </a>
+                    <span class="join-note">Free to join. No spam. Leave anytime.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="section-padding" id="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get In Touch</h2>
+                    <p>Have questions, collaboration ideas, or want to share research? Reach out to us.</p>
+                </div>
+
+                <div class="contact-container">
+                    <!-- Left: Info -->
+                    <div class="contact-info">
+                        <h3>Let's Connect</h3>
+                        <p>We are always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+                        
+                        <div class="contact-method">
+                            <i class="fa-regular fa-envelope"></i>
+                            <a href="mailto:thegreencompass.research@gmail.com">thegreencompass.research@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Right: Form -->
+                    <div class="contact-form-wrap">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Full Name</label>
+                                <input type="text" id="name" class="form-control" placeholder="Jane Doe" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="jane@example.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject" class="form-control" required>
+                                    <option value="" disabled selected>Select a topic...</option>
+                                    <option value="Collaboration">Collaboration</option>
+                                    <option value="Research Question">Research Question</option>
+                                    <option value="Join Query">Join Query</option>
+                                    <option value="General">General Inquiry</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" class="form-control" placeholder="How can we help you?" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-full">
+                                <i class="fa-regular fa-paper-plane"></i> Send Message
+                            </button>
+
+                            <div class="form-disclaimer">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>This will open your default email app to send the message. We'll respond within 3-5 days.</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <i class="fa-regular fa-compass"></i> The Green Compass
+            </div>
+            
+            <div class="footer-links">
+                <a href="mailto:thegreencompass.research@gmail.com"><i class="fa-regular fa-envelope"></i> thegreencompass.research@gmail.com</a>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 The Green Compass. A research community by Abrar Ahsan, Research Director.</p>
+                <p class="built-note">Built with curiosity and consistency.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Contact Form Handling (Mailto construction)
+            const contactForm = document.getElementById('contactForm');
+            
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent page reload
+                
+                // Get form values
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value.trim();
+                
+                // Construct the mailto link parameters
+                const mailtoEmail = "thegreencompass.research@gmail.com";
+                const mailtoSubject = encodeURIComponent(`[Website Form] ${subject} - from ${name}`);
+                const mailtoBody = encodeURIComponent(`Name: ${name}\nReturn Email: ${email}\n\nMessage:\n${message}\n\n---\nSent via The Green Compass Website`);
+                
+                const mailtoUrl = `mailto:${mailtoEmail}?subject=${mailtoSubject}&body=${mailtoBody}`;
+                
+                // Show user feedback alert
+                alert("Thank you! Your default email client will now open. Please press 'Send' in your email app to complete the message.");
+                
+                // Trigger the email client
+                window.location.href = mailtoUrl;
+                
+                // Optional: clear the form after submission
+                contactForm.reset();
+            });
+
+            // 2. Smooth Scrolling for Anchor Links (like "Meet the Team" button)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
